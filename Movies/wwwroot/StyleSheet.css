@@ -234,6 +234,16 @@ main {
 .embed.hide {
     display: none;
 }
-embed.show{
+.embed.show{
     display:inline-block;
 }
+.arrow{
+    position: absolute;
+    font-size:40px;
+}
+    .arrow.left-arrow {
+        left: 5%;
+    }
+    .arrow.right-arrow {
+        right: 5%;
+    }
