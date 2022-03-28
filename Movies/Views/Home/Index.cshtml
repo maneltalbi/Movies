@@ -5,10 +5,7 @@
         <input type="text" placeholder="search" id="search" class="search" />
     </form>
 </header>
-<div id="tags">
-
-
-</div>
+<div id="tags"></div>
 <div id="myNav" class="overlay">
 
     <!-- Button to close the overlay navigation -->
@@ -185,7 +182,8 @@
                     document.getElementById("myNav").style.width = "100%";
                     if (videoData.results.length > 0) {
                         var embed = [];
-                        videoData.results.forEach(video => {
+                        var dots = [];
+                        videoData.results.forEach((video, idx) => {
                             let { name, key, site } = video
                             if (site == 'YouTube') {
                                 embed.push(`
@@ -197,11 +195,21 @@
                                     allowfullscreen></iframe>
                                      `
                                 )
+                                dots.push(`
+                                          <span class="dot">${idx + 1}</span>
+                                        `)
                             }
 
                         })
+                        var content = `
+                                      <h1 class="no-results">${movie.original_title}</h1>
+                                       <br/>
+                                      ${embed.join('')}
+                                        <br/>
+                                        <div class="dots">${dots.join('')}</div>
+                                      `
 
-                        overlayContent.innerHTML = embed.join('');
+                        overlayContent.innerHTML = content;
                         activeSlide = 0;
                         showVideos();
                     } else {
@@ -219,6 +227,7 @@
         totalVideos = 0;
         function showVideos() {
             let embedClasses = document.querySelectorAll('.embed');
+            let dots = document.querySelectorAll('.dot');
             totalVideos = embedClasses.length;
             embedClasses.forEach((embedTag, idx) => {
                 if (activeSlide == idx) {
@@ -229,6 +238,13 @@
                     embedTag.classList.remove('show')
                 }
 
+            })
+            dots.forEach((dot, indx) => {
+                if (activeSlide == indx) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active')
+                }
             })
         }
         const leftArrow = document.getElementById('left-arrow')
