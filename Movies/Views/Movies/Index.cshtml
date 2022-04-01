@@ -1,0 +1,20 @@
+﻿
+@model Movies.Models.Movie
+<div>
+
+    @*<div>
+
+                  <h3>@ViewBag.title</h3>
+              </div>
+        <img src="@ViewBag.Poster" />*@
+    @foreach(var result in ViewBag.results)
+            {
+        <div class="movie">
+            <img src="@result.poster_path" />
+            <h3>@result.original_title</h3>
+        </div>
+            }
+
+
+
+</div>

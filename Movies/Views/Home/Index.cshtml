@@ -19,6 +19,7 @@
     <a href="javascript:void(0)" class="arrow right-arrow" id="right-arrow">&#8658;</a>
 
 </div>
+
 <main id="main">
 </main>
 <div class="pagination">
@@ -148,9 +149,10 @@
             data.forEach(movie => {
                 const { title, poster_path, vote_average, overview, id } = movie;
                 const movieEl = document.createElement('div');
+                let id1 = movie.id;
                 movieEl.classList.add('movie');
                 movieEl.innerHTML = `
-                                <form method="post" asp-action="">
+                                
                                 <img src="${poster_path ? IMG_URL + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}" asp-for="image" />
                     <div class="movie-info">
                         <h3 asp-for="title">${title}</h3 >
@@ -163,10 +165,10 @@
                       <p asp-for="overview"> ${overview} </p>
                          <br/>
                           <button class="know-more" id="${id}">Know More</button>
-                         <input type="submit" class="know-more" value="Save Info"/>
+                         <button class="know-more" id="${id1}">Save info</button>
 
                     </div>
-    </form>
+   
 `
 
 
@@ -176,10 +178,17 @@
                     console.log(id)
                     openNav(movie)
                 })
-
+                document.getElementById(id1).addEventListener('click', () => {
+                    console.log(id1)
+                    
+                })
 
             })
         }
+        function getinfo() {
+            return movie;
+        }
+
         const overlayContent = document.getElementById('overlay-content');
         /* Open when someone clicks on the span element */
         function openNav(movie) {
